@@ -1,0 +1,89 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+/*Superclass*/
+class Computer {
+    protected:
+        string brand;
+        int year;
+        float price;
+    public:
+        void setBrand(string brand) {
+            this->brand = brand;
+        }
+        void setYear(int year) {
+            this->year = year;
+        }
+        void setPrice(float price) {
+            this->price = price;
+        }
+};
+
+/*Subclass 1*/
+class Client: public Computer {
+    private:
+        int clientserial;
+        bool isdesktop;
+    public:
+        void setClientserial(int clientserial) {
+            this->clientserial = clientserial;
+        }
+        void setIsdesktop(bool isdesktop) {
+            this->isdesktop = isdesktop;
+        }
+        void display() {
+            cout << "Client computer brand: " << brand << endl;
+            cout << "Client computer year: " << year << endl;
+            cout << "Client computer price: $" << price << endl;
+            cout << "Client ID: " << clientserial<< endl;
+            cout << "Is laptop: " << (isdesktop ? "Yes" : "No") << endl;
+        }
+};
+
+/*Subclass 2*/
+class Server: public Computer {
+    private:
+        int serverserial;
+        int numCores;
+    public:
+        void setServerserial(int serverserial) {
+            this->serverserial = serverserial;
+        }
+        void setNumCores(int numCores) {
+            this->numCores = numCores;
+        }
+        void display() {
+            cout << "Server computer brand: " << brand << endl;
+            cout << "Server computer year: " << year << endl;
+            cout << "Server computer price: $" << price << endl;
+            cout << "Server ID: " << serverserial << endl;
+            cout << "Number of cores: " << numCores << endl;
+        }
+};
+
+
+int main() {
+    
+    Client myClient;
+    myClient.setBrand("hp");
+    myClient.setYear(2021);
+    myClient.setPrice(1000.50);
+    myClient.setClientserial(42180);
+    myClient.setIsdesktop(true);
+
+    
+    Server myServer;
+    myServer.setBrand("lenovo");
+    myServer.setYear(2019);
+    myServer.setPrice(1200.00);
+    myServer.setServerserial(80124);
+    myServer.setNumCores(7);
+
+   
+    myClient.display();
+    myServer.display();
+
+    return 0;
+}
