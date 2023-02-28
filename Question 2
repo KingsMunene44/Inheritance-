@@ -1,97 +1,67 @@
-#include<iostream>
-
-#include<string>
+#include <iostream>
+#include <string>
 
 using namespace std;
 
-class Person
-
-{
-
-    string firstname;
-
-    string lastname;
-
+//base class
+class Person {
+protected:
     int age;
-
+    string firstName;
+    string lastName;
 public:
-
-    void getInfo()
-
-    {
-
-        cout<<"Enter your firstname"<<endl;
-
-        cin>>firstname;
-
-        cout<<"Enter your lastname"<<endl;
-
-        cin>>lastname;
-
-        cout<<"Enter your age"<<endl;
-
-        cin>>age;
-
+    Person(int _age, string _firstName, string _lastName) {
+        age = _age;
+        firstName = _firstName;
+        lastName = _lastName;
     }
 
-    void display_info()
-
-    {
-
-        cout<<"Displaying Data"<<endl;
-
-        cout<<"Firstname  :"<<firstname<<endl;
-
-        cout<<"Lastname   :"<<lastname<<endl;
-
-        cout<<"Age        :"<<age<<endl;
-
+    void setValues(int _age, string _firstName, string _lastName) {
+        age = _age;
+        firstName = _firstName;
+        lastName = _lastName;
     }
 
+    void getValues() {
+        cout << "Name: " << firstName << " " << lastName << endl;
+        cout << "Age: " << age << endl;
+    }
 };
 
-class Student : public Person
-
-{
-
-    int Institution;
-
+//derived class
+class Student : public Person {
+protected:
+    string institution;
+    int year;
+    int registrationNumber;
 public:
-
-    void getInstitution()
-
-    {
-
-        cout<<"Enter your Institution"<<endl;
-
-        cin>>Institution;
-
+    Student(int _age, string _firstName, string _lastName, string _institution, int _year, int _registrationNumber) : Person(_age, _firstName, _lastName) {
+        institution = _institution;
+        year = _year;
+        registrationNumber = _registrationNumber;
     }
 
-    void show_Institution()
-
-    {
-
-        cout<<"Student's Institution :"<<Institution<<"\n"<<endl;
-
+    void setValues(int _age, string _firstName, string _lastName, string _institution, int _year, int _registrationNumber) {
+        Person::setValues(_age, _firstName, _lastName);
+        institution = _institution;
+        year = _year;
+        registrationNumber = _registrationNumber;
     }
 
+    void getValues() { //takes in all three data members as arguments and initializes them
+        Person::getValues();
+        cout << "Institution: " << institution << endl;
+        cout << "Year of Study: " << year << endl;
+        cout << "Registration Number: " << registrationNumber << endl;
+    }
 };
 
-int main()
+int main() {
+    Student myStudent(21, "John", "Doe", "University of XYZ", 3, 12345);
+    myStudent.getValues();
 
-{
-
-    Student obj1;
-
-    obj1.getInfo();
-
-    obj1.getInstitution();
-
-    obj1.display_info();
-
-    obj1.show_Institution();
+    myStudent.setValues(22, "Jane", "Doe", "University of ABC", 2, 67890);
+    myStudent.getValues();
 
     return 0;
-
 }
